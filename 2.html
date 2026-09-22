@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Thoricas — Clean Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #09090b;
+      --text-muted: #64748b;
+      --blue: #0284c7;
+      --blue-soft: #f0f9ff;
+      --border: #e2e8f0;
+      --card-bg: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #09090b;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .deck {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      min-height: 600px;
+      background: var(--bg);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .slide {
+      display: none;
+      flex: 1;
+      padding: 56px 64px 70px;
+      flex-direction: column;
+    }
+    .slide.active { display: flex; }
+    
+    /* Header Typography */
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    h2.title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 750px;
+    }
+
+    /* 3-Card Universal Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .card h3 { font-size: 17px; font-weight: 600; }
+    .card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+    
+    /* Slide 6 (Split Ask Layout) */
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+      flex: 1;
+    }
+    .ask-card {
+      background: #09090b;
+      color: #fff;
+      border-radius: 12px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ask-amount { font-size: 36px; font-weight: 700; color: #38bdf8; }
+
+    /* Clean Controls */
+    .footer-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 64px;
+      right: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .nav-btns button {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .nav-btns button:hover { background: #f1f5f9; }
+  </style>
+</head>
+<body>
+
+  <div class="deck">
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide active">
+      <div class="tag">Project Thoricas</div>
+      <div style="margin: auto 0;">
+        <h1 style="font-size: 42px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; max-width: 800px; margin-bottom: 16px;">
+          Physical drone interdiction.<br>Zero bullets. Zero jamming.
+        </h1>
+        <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.5;">
+          A low-cost mechanical payload that fouls autonomous and dark drone motors from above.
+        </p>
+      </div>
+      <div class="footer-bar">
+        <span>Confidential Pitch Deck</span>
+        <span>Slide 1 of 6</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <div class="slide">
+      <div class="tag">01 / The Problem</div>
+      <h2 class="title">Current drone defenses have critical blind spots.</h2>
+      <p class="subtitle">Autonomous low-altitude drones routinely bypass multi-million dollar defense layers.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-num">!</div>
+          <h3>RF Jammers Are Obsolete</h3>
+          <p>Modern combat drones fly using optical sensors, onboard AI, or fiber tethers. They emit zero RF signal to jam.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">!</div>
+          <h3>Missiles Are Unsustainable</h3>
+          <p>Firing a $100K guided missile to destroy a $1K commercial drone creates an impossible cost-exchange attrition rate.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">!</div>
+          <h3>Guns Cause Collateral Damage</h3>
+          <p>Shrapnel and stray pellets cannot be fired near commercial airports, critical energy grids, or crowded stadiums.</p>
+        </div>
+      </div>
+      <div class="footer-bar"><span>The Problem</span><span>Slide 2 of 6</span></div>
+    </div>
+
+    <!-- SLIDE 3: HOW IT WORKS -->
+    <div class="slide">
+      <div class="tag">02 / The Solution</div>
+      <h2 class="title">Simple top-down physical interception.</h2>
+      <p class="subtitle">Offloading tracking to the ground keeps our airborne platform cheap and agile.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-num">1</div>
+          <h3>Ground Vectoring</h3>
+          <p>Ground radar computes line-of-sight and sends acceleration setpoints. No heavy, expensive computing on the drone.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">2</div>
+          <h3>Overhead Ingress</h3>
+          <p>The interceptor dives from above, utilizing the threat drone’s own rotor downwash to suck in our payload.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">3</div>
+          <h3>Motor Stall Pulse</h3>
+          <p>A regulated pneumatic pulse ejects high-tensile polymer that wraps motor bells, forcing immediate ESC shutdown.</p>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Engagement Architecture</span><span>Slide 3 of 6</span></div>
+    </div>
+
+    <!-- SLIDE 4: UNFAIR ADVANTAGE -->
+    <div class="slide">
+      <div class="tag">03 / Why Thoricas Wins</div>
+      <h2 class="title">Built where legacy countermeasures fail.</h2>
+      <p class="subtitle">Designed for high-density swarms and strict civilian safety regulations.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-num">✓</div>
+          <h3>100% Jam-Proof</h3>
+          <p>Physical rotor entanglement stops targets regardless of encrypted links, GPS loss, or complete radio silence.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">✓</div>
+          <h3>Multi-Shot Capacity</h3>
+          <p>Unlike single-use net canisters, our pneumatic gas drive fires multiple rapid pulses per sortie to kill swarms.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">✓</div>
+          <h3>Zero Collateral</h3>
+          <p>No explosives, no ballistic shrapnel. 100% safe for active runways and petrochemical refineries.</p>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Core Advantages</span><span>Slide 4 of 6</span></div>
+    </div>
+
+    <!-- SLIDE 5: MARKET -->
+    <div class="slide">
+      <div class="tag">04 / Market Opportunity</div>
+      <h2 class="title">Dual-use market across civil and tactical sectors.</h2>
+      <p class="subtitle">Unprotected low-altitude airspace represents the fastest growing gap in global security.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-num">A</div>
+          <h3>Military & Forward Bases</h3>
+          <p><b>Need:</b> Swarm defense against autonomous FPV loitering strikes without expending missile stockpiles.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">B</div>
+          <h3>Airports & Refineries</h3>
+          <p><b>Need:</b> Non-kinetic drone clearance that doesn't damage airport electronics or risk ignition near fuel storage.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">C</div>
+          <h3>Public Arenas & VIP</h3>
+          <p><b>Need:</b> Soft-kill perimeter denial over open-air stadiums without falling shrapnel hazards.</p>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Target Sectors</span><span>Slide 5 of 6</span></div>
+    </div>
+
+    <!-- SLIDE 6: THE ASK -->
+    <div class="slide">
+      <div class="tag">05 / The Ask & Roadmap</div>
+      <h2 class="title">Funding live air-to-air demonstrations.</h2>
+      <p class="subtitle">Transitioning from proven laboratory test rigs to field-ready interception.</p>
+      <div class="split-grid">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div><b>Phase 1 (Completed):</b> Static bench motor stall & fluid nozzle modeling.</div>
+          <div><b>Phase 2 (In Progress):</b> Tethered flight downwash penetration tests.</div>
+          <div><b>Phase 3 (Next Step):</b> Autonomous dynamic flight trials with defense partners.</div>
+        </div>
+        <div class="ask-card">
+          <span style="font-size: 12px; text-transform: uppercase; color: #94a3b8;">Seed Investment</span>
+          <div class="ask-amount">Seed Round</div>
+          <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.5;">
+            Funds full-scale outdoor flight trials, patent protection, and pilot unit integration for early commercial and military adopters.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>Execution & Investment</span>
+        <span>Slide 6 of 6</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div style="margin-top: 16px; display: flex; gap: 12px;">
+    <button id="prev" style="padding: 6px 14px; border-radius: 6px; border: 1px solid #333; background: #18181b; color: white; cursor: pointer;">&larr; Prev</button>
+    <button id="next" style="padding: 6px 14px; border-radius: 6px; border: 1px solid #333; background: #18181b; color: white; cursor: pointer;">Next &rarr;</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let cur = 0;
+    function show(idx) {
+      slides[cur].classList.remove('active');
+      cur = (idx + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+    }
+    document.getElementById('prev').onclick = () => show(cur - 1);
+    document.getElementById('next').onclick = () => show(cur + 1);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') show(cur + 1);
+      if (e.key === 'ArrowLeft') show(cur - 1);
+    });
+  </script>
+</body>
+</html>
