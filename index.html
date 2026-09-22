@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Thoricas — Strategic C-UAS Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text-main: #09090b;
+      --text-sub: #52525b;
+      --text-muted: #71717a;
+      --blue-primary: #38bdf8;
+      --blue-deep: #0284c7;
+      --blue-soft: #f0f9ff;
+      --blue-border: #bae6fd;
+      --green-soft: #f0fdf4;
+      --green-text: #166534;
+      --cyan-soft: #ecfeff;
+      --cyan-text: #155e75;
+      --border-light: #e4e4e7;
+      --border-subtle: #f4f4f5;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #09090b;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* 16:9 Presentation Stage */
+    .deck-container {
+      position: relative;
+      width: 96vw;
+      max-width: 1400px;
+      aspect-ratio: 16 / 9;
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 52px 72px 46px 72px;
+      display: none;
+      flex-direction: column;
+      background: #ffffff;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Typography Hierarchy */
+    .slide-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--blue-deep);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .slide-title {
+      font-size: 38px;
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      max-width: 960px;
+      margin-bottom: 10px;
+    }
+
+    .slide-subtitle {
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--text-sub);
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+
+    .slide-footer {
+      position: absolute;
+      bottom: 20px;
+      left: 72px;
+      right: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+
+    /* SLIDE 1: Cover */
+    .cover-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      height: 100%;
+      align-items: center;
+      gap: 48px;
+    }
+    .cover-hero-graphic {
+      width: 100%;
+      height: 86%;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #a7f3d0 0%, #38bdf8 50%, #818cf8 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cover-hero-graphic::after {
+      content: '';
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.75) 0%, transparent 60%);
+      filter: blur(24px);
+    }
+
+    /* SLIDE 2: Problem (Defense Incapability) */
+    .defense-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      flex: 1;
+      align-items: stretch;
+      margin-top: 4px;
+    }
+    .defense-card {
+      background: #fafafa;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .defense-card:hover {
+      background: #ffffff;
+      border-color: var(--blue-deep);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px -8px rgba(2, 132, 199, 0.14);
+    }
+    .defense-type {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .defense-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .defense-flaw-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 600;
+      background: #f1f5f9;
+      color: #334155;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      border: 1px solid #e2e8f0;
+    }
+    .defense-card:hover .defense-flaw-tag {
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      border-color: var(--blue-border);
+    }
+    .defense-desc {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin-top: auto;
+    }
+
+    /* SLIDE 3: The Solution (Clean, Text-First, Spacious Flow) */
+    .solution-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+    .solution-step {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 34px 26px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .solution-step:hover {
+      border-color: var(--blue-deep);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(2, 132, 199, 0.16);
+    }
+    .step-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-border);
+      color: var(--blue-deep);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .step-heading {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .step-summary {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* SLIDE 4: Strategic Advantages (3 Cards) */
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      flex: 1;
+      align-items: stretch;
+    }
+    .rounded-card {
+      border-radius: 16px;
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease;
+    }
+    .rounded-card:hover {
+      transform: translateY(-3px);
+    }
+    .card-green { background: var(--green-soft); border: 1px solid #bbf7d0; }
+    .card-blue  { background: var(--blue-soft);  border: 1px solid #bae6fd; }
+    .card-teal  { background: var(--cyan-soft);  border: 1px solid #a5f3fc; }
+
+    .card-icon-pill {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+    .card-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #334155;
+    }
+
+    /* SLIDE 5: Architecture */
+    .arch-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      justify-content: center;
+    }
+    .arch-layer {
+      border: 1px solid var(--border-light);
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 16px 24px;
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.15s ease;
+    }
+    .arch-layer:hover {
+      background: var(--blue-soft);
+      border-color: var(--blue-deep);
+    }
+    .layer-badge {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue-deep);
+    }
+    .layer-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 2px;
+    }
+    .layer-detail {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+    .layer-specs {
+      font-size: 12px;
+      font-weight: 500;
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+      color: #0f172a;
+    }
+
+    /* SLIDE 6: Market Opportunity (Stat Columns) */
+    .market-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+      margin-top: 6px;
+    }
+    .stat-card {
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #fafafa;
+      transition: all 0.2s ease;
+    }
+    .stat-card:hover {
+      background: #ffffff;
+      border-color: var(--blue-deep);
+      box-shadow: 0 8px 24px -8px rgba(2, 132, 199, 0.12);
+      transform: translateY(-2px);
+    }
+    .stat-number {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--blue-deep);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000;
+    }
+    .stat-sub {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      line-height: 1.55;
+    }
+
+    /* SLIDE 7: Market Opportunity (Target Verticals) */
+    .market-sector-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      flex: 1;
+      align-items: stretch;
+      margin-top: 6px;
+    }
+    .sector-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+    .sector-card:hover {
+      border-color: var(--blue-deep);
+      box-shadow: 0 8px 24px -8px rgba(2, 132, 199, 0.12);
+      transform: translateY(-2px);
+    }
+    .sector-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue-deep);
+      background: var(--blue-soft);
+      padding: 4px 8px;
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+    .sector-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.3;
+    }
+    .sector-problem {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+    .sector-driver-box {
+      margin-top: auto;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .driver-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .driver-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* SLIDE 8: Roadmap & Ask */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      flex: 1;
+      align-items: center;
+    }
+    .timeline-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+    }
+    .timeline-steps::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: #e2e8f0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .timeline-bullet {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--blue-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue-deep);
+      z-index: 2;
+    }
+    .timeline-content h5 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-content p {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+    .ask-box {
+      background: #000;
+      color: #fff;
+      border-radius: 16px;
+      padding: 38px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ask-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+    }
+    .ask-amount {
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--blue-primary);
+      letter-spacing: -0.02em;
+    }
+    .ask-desc {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Floating Capsule Controls */
+    .controls-bar {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(24, 24, 27, 0.88);
+      backdrop-filter: blur(10px);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 50;
+    }
+    .btn-nav {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background 0.15s ease;
+      font-family: var(--font-sans);
+    }
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .slide-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dot.active {
+      background: var(--blue-primary);
+      transform: scale(1.25);
+    }
+    .key-hint {
+      font-size: 11px;
+      color: #71717a;
+      margin-left: 8px;
+      border-left: 1px solid rgba(255,255,255,0.15);
+      padding-left: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container" id="deck">
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide active" id="slide-1">
+      <div class="slide-tag">PROJECT THORICAS</div>
+      <div class="cover-layout">
+        <div>
+          <h1 class="slide-title">Physical Drone Interception at Asymmetric Advantage.</h1>
+          <p class="slide-subtitle" style="max-width: 520px;">
+            An RF-agnostic, zero-collateral soft-kill payload neutralizing autonomous and dark drone threats.
+          </p>
+          <div style="font-size: 14px; color: var(--text-sub); line-height: 1.6; margin-top: 40px;">
+            <strong>Confidential Strategic Pitch</strong><br />
+            Next-Generation Counter-UAS Defense Architecture
+          </div>
+        </div>
+        <div class="cover-hero-graphic">
+          <svg width="240" height="240" viewBox="0 0 200 200" fill="none" style="z-index: 2;">
+            <circle cx="100" cy="100" r="70" stroke="white" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+            <path d="M40 100 C70 40, 130 160, 160 100" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <path d="M100 40 C40 70, 160 130, 100 160" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="12" fill="white"/>
+            <circle cx="100" cy="100" r="6" fill="#0284c7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Project Thoricas · Tactical Defense Inquiries</span>
+        <span>Slide 1 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <div class="slide" id="slide-2">
+      <div class="slide-tag">01 / THE DEFENSE BOTTLENECK</div>
+      <h2 class="slide-title">Existing countermeasures fail against modern autonomous drones.</h2>
+      <p class="slide-subtitle">Current defense layers possess fundamental operational blind spots against low-altitude multirotor swarms.</p>
+
+      <div class="defense-grid">
+        <div class="defense-card">
+          <div class="defense-type">Electronic Warfare</div>
+          <div class="defense-name">RF Jammers & Spoofing</div>
+          <div class="defense-flaw-tag">Spectrum Blind</div>
+          <div class="defense-desc">
+            Completely bypassed by autonomous visual odometry, onboard inertial navigation, and optical fiber links that emit zero RF signatures.
+          </div>
+        </div>
+
+        <div class="defense-card">
+          <div class="defense-type">Kinetic Precision</div>
+          <div class="defense-name">Guided Missile Systems</div>
+          <div class="defense-flaw-tag">Cost-Exhaustive</div>
+          <div class="defense-desc">
+            Expending high-value guided interceptors against low-cost disposable strike drones creates an unsustainable operational attrition exchange.
+          </div>
+        </div>
+
+        <div class="defense-card">
+          <div class="defense-type">Direct Fire</div>
+          <div class="defense-name">Shotguns, Flak & Debris</div>
+          <div class="defense-flaw-tag">Collateral Risk</div>
+          <div class="defense-desc">
+            Ballistic shrapnel, stray pellets, and falling unexploded munitions preclude deployment over commercial airports, energy facilities, and cities.
+          </div>
+        </div>
+
+        <div class="defense-card">
+          <div class="defense-type">Directed Energy</div>
+          <div class="defense-name">High-Power Laser Systems</div>
+          <div class="defense-flaw-tag">Weather Sensitive</div>
+          <div class="defense-desc">
+            Extended thermal dwell times per target and severe beam degradation through smoke, fog, and rain restrict multi-target swarm defense.
+          </div>
+        </div>
+
+        <div class="defense-card">
+          <div class="defense-type">Mechanical Nets</div>
+          <div class="defense-name">Legacy Net Launchers</div>
+          <div class="defense-flaw-tag">Downwash Deflected</div>
+          <div class="defense-desc">
+            Pre-woven nylon cords are easily repelled by violent propeller downwash wakes, while bulky hardware restricts platforms to a single shot.
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Project Thoricas · Strategic Vulnerability Matrix</span>
+        <span>Slide 2 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: THE SOLUTION (TEXT-FIRST, CLEAN & SPACIOUS) -->
+    <div class="slide" id="slide-3">
+      <div class="slide-tag">02 / ENGAGEMENT ARCHITECTURE</div>
+      <h2 class="slide-title">Physical interdiction in four synchronized phases.</h2>
+      <p class="slide-subtitle">A simple, top-down mechanical sequence engineered to penetrate rotor wake and force motor shutdown.</p>
+
+      <div class="solution-flow">
+        <!-- Step 1 -->
+        <div class="solution-step">
+          <div class="step-badge">01</div>
+          <h3 class="step-heading">Radar Vectoring</h3>
+          <p class="step-summary">
+            Ground 3D sensors guide the interceptor into position, offloading heavy processing from the drone to keep airborne hardware expendable and agile.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="solution-step">
+          <div class="step-badge">02</div>
+          <h3 class="step-heading">Overhead Ingress</h3>
+          <p class="step-summary">
+            The platform approaches from above, harnessing the adversary drone's own downward rotor suction to naturally ingest the expanding entanglement fan.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="solution-step">
+          <div class="step-badge">03</div>
+          <h3 class="step-heading">Planar Pulse</h3>
+          <p class="step-summary">
+            A regulated cold-gas impulse drives polymer through a passive nozzle, generating an expanding planar sweep that pierces opposing airflow.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="solution-step">
+          <div class="step-badge">04</div>
+          <h3 class="step-heading">Mechanical Lock</h3>
+          <p class="step-summary">
+            Instantly foul spinning motor bells, generating opposing tensile drag that halts rotation and triggers immediate speed controller shutdown.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Project Thoricas · Engagement Sequence</span>
+        <span>Slide 3 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: STRATEGIC ADVANTAGES -->
+    <div class="slide" id="slide-4">
+      <div class="slide-tag">03 / CORE CAPABILITIES</div>
+      <h2 class="slide-title">Engineered where conventional countermeasures fail.</h2>
+      <p class="slide-subtitle">Three structural advantages that reset the defense paradigm across all operational environments.</p>
+
+      <div class="cards-row">
+        <div class="rounded-card card-green">
+          <div class="card-icon-pill">✓</div>
+          <h3 class="card-title">Jam-Proof Mechanical Defeat</h3>
+          <p class="card-desc">
+            Physical propulsion entanglement halts threat platforms regardless of their communication link. Neutralizes RF-silent, dark, GPS-denied, and fiber-optic tethered multirotors.
+          </p>
+        </div>
+
+        <div class="rounded-card card-blue">
+          <div class="card-icon-pill">↻</div>
+          <h3 class="card-title">Repeatable Multi-Shot Capacity</h3>
+          <p class="card-desc">
+            Unlike one-and-done net devices, the cold-gas pneumatic drive delivers rapid sequential pulses per sortie, enabling follow-up engagements on evasive targets or incoming swarms.
+          </p>
+        </div>
+
+        <div class="rounded-card card-teal">
+          <div class="card-icon-pill">◎</div>
+          <h3 class="card-title">Zero-Collateral Footprint</h3>
+          <p class="card-desc">
+            No shrapnel, unexploded ordnance, or radio frequency disruption. Safe for immediate deployment in civilian terminal airspaces, petrochemical refineries, and crowded public venues.
+          </p>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Project Thoricas · Operational Superiority</span>
+        <span>Slide 4 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: SYSTEM ARCHITECTURE -->
+    <div class="slide" id="slide-5">
+      <div class="slide-tag">04 / SYSTEM ARCHITECTURE</div>
+      <h2 class="slide-title">Offloading intelligence keeps airborne platforms expendable.</h2>
+      <p class="slide-subtitle">A distributed architecture separating spatial computation from airborne mechanical execution.</p>
+
+      <div class="arch-stack">
+        <div class="arch-layer">
+          <span class="layer-badge">Layer 01 · Ground</span>
+          <div>
+            <div class="layer-name">Surveillance & Predictive Guidance ("The Mind")</div>
+            <div class="layer-detail">Dual-target ground sensors compute proactive line-of-sight tracking setpoints.</div>
+          </div>
+          <div class="layer-specs">High-Frequency Update · Zero Airborne Compute</div>
+        </div>
+
+        <div class="arch-layer">
+          <span class="layer-badge">Layer 02 · Link</span>
+          <div>
+            <div class="layer-name">Real-Time Telemetry Datalink</div>
+            <div class="layer-detail">Streams acceleration vectors directly to the interceptor flight controller.</div>
+          </div>
+          <div class="layer-specs">Predictive Latency Compensation</div>
+        </div>
+
+        <div class="arch-layer">
+          <span class="layer-badge">Layer 03 · Trigger</span>
+          <div>
+            <div class="layer-name">Terminal Range Verification Gate</div>
+            <div class="layer-detail">Belly-mounted downward sensor fires payload at optimal standoff distance.</div>
+          </div>
+          <div class="layer-specs">Sub-Millisecond Hardware Logic</div>
+        </div>
+
+        <div class="arch-layer">
+          <span class="layer-badge">Layer 04 · Payload</span>
+          <div>
+            <div class="layer-name">Electromechanical Interdictor ("The Black Box")</div>
+            <div class="layer-detail">Micro-solenoid, passive planar Coandă oscillator, and automated dry-gas purge.</div>
+          </div>
+          <div class="layer-specs">Ultra-Light SWaP Footprint · Multi-Shot</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Project Thoricas · Layered System Breakdown</span>
+        <span>Slide 5 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: MARKET OPPORTUNITY (MACRO & STATS) -->
+    <div class="slide" id="slide-6">
+      <div class="slide-tag">05 / MARKET OPPORTUNITY</div>
+      <h2 class="slide-title">Addressing the fastest growing segment in airspace defense.</h2>
+      <p class="slide-subtitle">Dual-use deployment across frontline tactical defense and critical civilian assets.</p>
+
+      <div class="market-columns">
+        <div class="stat-card">
+          <div class="stat-number">Surging Demand</div>
+          <div class="stat-label">Global C-UAS Market Acceleration</div>
+          <div class="stat-sub">Spurred by the ubiquitous proliferation of massed, low-cost multirotors across modern defense theaters.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">Dominant Threat</div>
+          <div class="stat-label">Low-Altitude Drone Proliferation</div>
+          <div class="stat-sub">Commercial multirotors represent the vast majority of airspace violations and asymmetric strikes worldwide.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">Dual Verticals</div>
+          <div class="stat-label">Defense & Civil Infrastructure</div>
+          <div class="stat-sub">Forward military bases needing swarm protection alongside international airports requiring non-kinetic clearance.</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Operation Thoricas · Market Growth</span>
+        <span>Slide 6 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: MARKET OPPORTUNITY (TARGET VERTICALS) -->
+    <div class="slide" id="slide-7">
+      <div class="slide-tag">06 / TARGET VERTICALS</div>
+      <h2 class="slide-title">Capturing multi-vertical demand across defense and civil airspace.</h2>
+      <p class="slide-subtitle">Low-altitude commercial multirotors represent the single fastest-growing airspace security threat worldwide.</p>
+
+      <div class="market-sector-grid">
+        <div class="sector-card">
+          <div class="sector-badge">Vertical 01 · Defense</div>
+          <h3 class="sector-title">Tactical Military & Forward Bases</h3>
+          <p class="sector-problem">
+            Frontline forward operating bases and mobile mechanized units face saturated loitering FPV strikes where traditional jamming fails against fiber-linked and autonomous systems.
+          </p>
+          <div class="sector-driver-box">
+            <span class="driver-title">Primary Purchase Driver</span>
+            <span class="driver-desc">Repeatable, low-cost swarm defense without depleting finite surface-to-air missile stockpiles.</span>
+          </div>
+        </div>
+
+        <div class="sector-card">
+          <div class="sector-badge">Vertical 02 · Infrastructure</div>
+          <h3 class="sector-title">Civilian Airports & Energy Grids</h3>
+          <p class="sector-problem">
+            Unidentified drones routinely trigger catastrophic airport shutdowns and threaten petrochemical facilities where kinetic flak or RF jamming is strictly banned by regulators.
+          </p>
+          <div class="sector-driver-box">
+            <span class="driver-title">Primary Purchase Driver</span>
+            <span class="driver-desc">Certified zero-collateral soft-kill allowing safe interdiction over busy runways and volatile chemical storage.</span>
+          </div>
+        </div>
+
+        <div class="sector-card">
+          <div class="sector-badge">Vertical 03 · Public Safety</div>
+          <h3 class="sector-title">Public Stadiums, VIP & Maritime</h3>
+          <p class="sector-problem">
+            Crowded sports stadiums, open-air government venues, and commercial cargo vessels require perimeter denial free from falling lead or explosive shrapnel.
+          </p>
+          <div class="sector-driver-box">
+            <span class="driver-title">Primary Purchase Driver</span>
+            <span class="driver-desc">Rapidly deployable, non-lethal interdiction compliant with strict municipal safety standards.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Project Thoricas · Commercial Market Assessment</span>
+        <span>Slide 7 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: ROADMAP & ASK -->
+    <div class="slide" id="slide-8">
+      <div class="slide-tag">07 / EXECUTION & THE ASK</div>
+      <h2 class="slide-title">Seed funding to execute dynamic outdoor flight trials.</h2>
+      <div class="roadmap-grid">
+        <div class="timeline-steps">
+          <div class="timeline-item">
+            <div class="timeline-bullet">1</div>
+            <div class="timeline-content">
+              <h5>Phase 1: Laboratory Validation </h5>
+              <p>Target requirement budgets set, nozzle fluid dynamics modeled, and static motor stall confirmed.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-bullet">2</div>
+            <div class="timeline-content">
+              <h5>Phase 2: Tethered Flight Trials</h5>
+              <p>Rotor downwash penetration verification and rapid multi-pulse sequence testing.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-bullet">3</div>
+            <div class="timeline-content">
+              <h5>Phase 3: Autonomous Live Interception</h5>
+              <p>Fully integrated ground-vectored live air-to-air drone intercept demonstrations with defense partners.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ask-box">
+          <div class="ask-label">Seed Investment Opportunity</div>
+          <div class="ask-amount">Early-Stage Round</div>
+          <div class="ask-desc">
+            Directly funds outdoor dynamic flight trials, proprietary formulation IP protection, and pilot integration with early commercial & defense adopters.
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Project Thoricas · Seed Capital Round</span>
+        <span>Slide 8 of 8</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FLOATING INTERACTIVE CONTROLS -->
+  <div class="controls-bar">
+    <button class="btn-nav" id="prev-btn">&larr; Prev</button>
+    <div class="slide-dots" id="dots-container"></div>
+    <button class="btn-nav" id="next-btn">Next &rarr;</button>
+    <button class="btn-nav" id="fs-btn">⛶</button>
+    <span class="key-hint">Use &larr; &rarr; or Space</span>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dots-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const fsBtn = document.getElementById('fs-btn');
+    const deck = document.getElementById('deck');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    // Build dots
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (idx === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(idx));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlide() {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        deck.requestFullscreen().catch(err => alert(err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    fsBtn.addEventListener('click', toggleFullScreen);
+  </script>
+</body>
+</html>
